@@ -543,8 +543,8 @@ class faceswap:
 
     def faceswap_fromvideo(self,BOTTOM_IMAGE,alpha = 0.999):
         bottom_img = self.imread(BOTTOM_IMAGE)  # 读取butom图像
-        h,w,_ = bottom_img.shape
-        w = (300*w)/(h*1.0)
+        h2,w2,_ = bottom_img.shape
+        w = (300*w2)/(h2*1.0)
         bottom_img = cv2.resize(bottom_img, (int(w),int(300)), interpolation=cv2.INTER_AREA)
         landmarks_bottom = self.get_landmarks(bottom_img)  # 获取人脸关键点68个
 
@@ -563,6 +563,9 @@ class faceswap:
             print(time.time()-time1)
             if type(faceswaped) == int:
                 continue
+            w = (500 * w2) / (h2 * 1.0)
+            faceswaped = cv2.resize(faceswaped, (int(w), int(500)), interpolation=cv2.INTER_AREA)
+
             cv2.imshow('mask_image',mask_img)
             cv2.imshow("faceswaped_image", faceswaped)
             # 保持画面的持续。
